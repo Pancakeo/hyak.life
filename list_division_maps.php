@@ -1,9 +1,9 @@
 <?php
 
 $files = array();
+$globber = glob("./hyak_files/division_maps/*.pdf");
 
-foreach (glob("./hyak_files/division_maps/*.pdf") as $filename) {
-	// echo "$filename size " . filesize($filename) . "\n<br/>";
+foreach ($globber as $filename) {
 	array_push($files, $filename);
 }
 
