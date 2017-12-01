@@ -34,7 +34,7 @@ $(function () {
 		var $loading = $("#loader").clone().show();
 		$("#page_content").html('').append($loading);
 
-		$.get('/fragments/' + pageKey + '.html?cacheBreak=' + Date.now(), function (res) {
+		$.get('./fragments/' + pageKey + '.html?cacheBreak=' + Date.now(), function (res) {
 			$("#page_content").html(res);
 
 			switch (pageKey) {
