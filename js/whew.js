@@ -23,6 +23,12 @@ $(function () {
 
 		$.get('./fragments/' + pageKey + '.html?cacheBreak=' + Date.now(), function (res) {
 			$("#page_content").html(res);
+			var currentYear = new Date().getFullYear();
+			if (currentYear < 2018) {
+				currentYear = 2018
+			}
+
+			$("#page_content").find(".current_year").text(currentYear);
 		});
 	};
 
@@ -48,6 +54,10 @@ $(function () {
 	}
 
 	var currentYear = new Date().getFullYear();
-	$("#current_year").text(currentYear);
+	if (currentYear < 2018) {
+		currentYear = 2018
+	}
+
+	$(".current_year").text(currentYear);
 
 });
