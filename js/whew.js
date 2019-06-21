@@ -1,5 +1,8 @@
 $(function () {
 
+	// just need this once, probably.
+	var loadedPages = {};
+
 	/**
 	 * Get the basename from the relative path (e.g. don't show the folder structure to the user.)
 	 * @param {*} str 
@@ -17,18 +20,30 @@ $(function () {
 	 */
 	var get_page = function (pageKey) {
 		history.pushState({}, "Main", "?page=" + pageKey);
+		var $fragment = $("#page_content #" + pageKey);
+		var $allFragments = $("#page_content > div");
+		$allFragments.hide();
 
-		var $loading = $("#loader").clone().show();
-		$("#page_content").html('').append($loading);
+		if (loadedPages[pageKey]) {
+			$fragment.show();
+			return;
+		}
+
+		var $loading = $("#loader").show();
+		$("#page_content #loading_wrapper").html('').append($loading);
 
 		$.get('./fragments/' + pageKey + '.html?cacheBreak=' + Date.now(), function (res) {
-			$("#page_content").html(res);
+			$loading.hide();
+			$fragment.html(res);
+
 			var currentYear = new Date().getFullYear();
 			if (currentYear < 2018) {
 				currentYear = 2018
 			}
 
 			$("#page_content").find(".current_year").text(currentYear);
+			$fragment.show();
+			loadedPages[pageKey] = true;
 		});
 	};
 
