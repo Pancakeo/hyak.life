@@ -2,6 +2,7 @@ $(function () {
 
 	// just need this once, probably.
 	var loadedPages = {};
+	var minCurrentYear = 2019;
 
 	/**
 	 * Get the basename from the relative path (e.g. don't show the folder structure to the user.)
@@ -29,16 +30,16 @@ $(function () {
 			return;
 		}
 
-		var $loading = $("#loader").show();
-		$("#page_content #loading_wrapper").html('').append($loading);
+		var $loading = $("#loader");
+		$loading.show();
 
 		$.get('./fragments/' + pageKey + '.html?cacheBreak=' + Date.now(), function (res) {
 			$loading.hide();
 			$fragment.html(res);
 
 			var currentYear = new Date().getFullYear();
-			if (currentYear < 2018) {
-				currentYear = 2018
+			if (currentYear < minCurrentYear) {
+				currentYear = minCurrentYear
 			}
 
 			$("#page_content").find(".current_year").text(currentYear);
@@ -69,8 +70,8 @@ $(function () {
 	}
 
 	var currentYear = new Date().getFullYear();
-	if (currentYear < 2018) {
-		currentYear = 2018
+	if (currentYear < minCurrentYear) {
+		currentYear = minCurrentYear
 	}
 
 	$(".current_year").text(currentYear);
