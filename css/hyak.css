@@ -1,9 +1,23 @@
 .nav-item {
-	cursor: pointer;
-	user-select: none;
+  cursor: pointer;
+  user-select: none;
 }
 
 .year-header {
-	font-size: 14pt;
-	margin-top: 20px;
+  font-size: 14pt;
+  margin-top: 20px;
 }
+
+@media (max-width: 575.98px) {
+  #meeting_notes li[year] {
+    max-width: 450px;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+  }
+}
+
+/* @media (max-width: 767.98px) {
+}
+
+@media (max-width: 991.98px) {
+} */
